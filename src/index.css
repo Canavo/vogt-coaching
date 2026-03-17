@@ -1,0 +1,267 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: #f6f8f7;
+  --color-surface: #ffffff;
+  --color-border: #e2e8e4;
+  --color-text: #2c3830;
+  --color-text-muted: #6b7d74;
+  --color-sage: #52876e;
+  --color-sage-light: #a0c1b0;
+  --color-slate: #6b82a0;
+  --shadow-card: 0 1px 3px rgba(44,56,48,0.06), 0 4px 16px rgba(44,56,48,0.06);
+  --shadow-card-hover: 0 2px 8px rgba(44,56,48,0.08), 0 8px 24px rgba(44,56,48,0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Typography ── */
+.font-display {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+/* ── Card ── */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* ── Schedule Grid ── */
+.schedule-cell {
+  cursor: pointer;
+  transition: opacity 0.1s ease, transform 0.1s ease;
+  border-radius: 3px;
+  user-select: none;
+}
+
+.schedule-cell:hover {
+  opacity: 0.85;
+  transform: scaleY(1.05);
+}
+
+.schedule-cell.empty {
+  background: #f0f3f1;
+  border: 1px dashed #d0d9d4;
+}
+
+.schedule-cell.empty:hover {
+  background: #e4ede8;
+}
+
+/* ── Slider ── */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  background: var(--color-border);
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-sage);
+  border: 2px solid white;
+  box-shadow: 0 1px 4px rgba(82,135,110,0.4);
+  transition: transform 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-sage);
+  border: 2px solid white;
+  cursor: pointer;
+}
+
+/* ── Animations ── */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeSlideIn 0.35s ease forwards;
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c8d5ce;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a0b8ae;
+}
+
+/* ── Tooltip ── */
+.tooltip {
+  position: relative;
+}
+
+.tooltip:hover::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2c3830;
+  color: white;
+  font-size: 11px;
+  font-family: 'Source Sans 3', sans-serif;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* ── Priority Bar ── */
+.priority-bar {
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #a0c1b0, #52876e);
+  transition: width 0.4s ease;
+}
+
+/* ── Week Grid ── */
+.week-grid-wrapper {
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+/* ── Comparison Heatmap ── */
+.heatmap-cell {
+  transition: opacity 0.2s;
+}
+
+.heatmap-cell:hover {
+  opacity: 0.75;
+  cursor: default;
+}
+
+/* ── Step transitions ── */
+.step-content {
+  animation: fadeSlideIn 0.4s ease forwards;
+}
+
+/* ── Select styling ── */
+select {
+  font-family: 'Source Sans 3', sans-serif;
+}
+
+/* ── Button ── */
+.btn-primary {
+  background: var(--color-sage);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(82,135,110,0.25);
+}
+
+.btn-primary:hover {
+  background: #3e6b57;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(82,135,110,0.35);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: white;
+  color: var(--color-sage);
+  border: 1.5px solid var(--color-sage-light);
+  border-radius: 8px;
+  padding: 9px 22px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.btn-secondary:hover {
+  background: #f4f7f5;
+  border-color: var(--color-sage);
+}
+
+/* ── Name badge ── */
+.name-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  background: #e4ede8;
+  color: #3e6b57;
+}
